@@ -1,31 +1,33 @@
 import express from "express";
 import ServerlessHttp from "serverless-http";
+import path from "path";
+import bodyParser from "body-parser";
 
 const app = express();
+const __dirname = path.resolve()
 
-var family = [
-    {name: "Anora", age: 40, year: 2003},
-    {name: "Aziza", age: 18, year: 2002}
-]
+const onlyAdmin = []
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res)=>{
-    res.send("Welcome to my API")
+    res.sendFile(__dirname + "/dist/index.html")
+})
+app.get("/users", (req, res)=>{
+    res.send(onlyAdmin)
 })
 
-app.get("/about", (req,res)=>{
-    res.json({
-        name: "Jamal",
-        age: 30,
-        hobbies: {
-            "1": "football",
-            "2": "piano",
-            "3": "coding"
-        }
-    })
+app.post("/sign-up", (req, res)=>{
+    const {username, password} = req.body;
+    const admin = {username, password};
+    if(admin.username === "admin" && admin.password === "admin123") {
+        res.send("Xush kebsiz admin!")
+    }else {
+        res.send("Siz kimsiz?")
+    }
 })
 
-app.get("/family", (req, res)=>{
-    res.json(family)
-})
+
 
 export const handler = ServerlessHttp(app);
