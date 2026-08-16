@@ -6,15 +6,62 @@
     <title>Document</title>
 </head>
 <style>
-    form {
-        width: 400px;
-        height: 400px;
-        background-color: red;;
+    body {
+        max-width: 1440px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-content: center;
     }
+    form {
+        margin-top: 30%;
+        width: 400px;
+        height: 420px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        background-color: #112;
+        box-shadow: 4px 20px 20px #404;
+    }
+
+    input {
+        width: 70%;
+        height: 40px;
+        border-radius: 20px;
+        border: none;
+        padding-left: 1rem;
+    }
+    label {
+        align-items: flex-start !important;
+        text-align: left !important;
+        color: white;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    button {
+        width: 60%;
+        height: 55px;
+        border-radius: 22px;
+        border: none;
+        background-color: rgb(91, 91, 165);
+        color: white;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 20px;
+        transform: scale(1);
+    }
+    button:active {
+        transition: 1ms all ease-in-out;
+        transform: scale(0.8);
+    }
+    
 </style>
 <body>
     <form action="sign-up" method="post">
+        <label for="">Username:</label>
         <input type="text" name="username"><br>
+        <label>Password: </label>
         <input type="password" name="password"><br>
         <button type="submit">Sign Up</button>
     </form>

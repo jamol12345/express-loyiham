@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinolar</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background-color: #0b0b16;
+        color: white;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    /* NAVBAR */
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 40px;
+        background-color: #112;
+        box-shadow: 0 4px 20px #404;
+    }
+    nav h2 {
+        margin: 0;
+        color: rgb(141, 141, 215);
+    }
+    nav div {
+        display: flex;
+        gap: 25px;
+    }
+    nav a {
+        color: white;
+        text-decoration: none;
+    }
+    nav a:hover {
+        color: rgb(141, 141, 215);
+    }
+
+    /* MAIN */
+    main {
+        flex: 1;
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    /* KARTOCHKALAR */
+    .cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 25px;
+        justify-content: center;
+    }
+    .card {
+        width: 240px;
+        background-color: #112;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 4px 10px 20px #202;
+        transform: scale(1);
+        transition: 200ms all ease-in-out;
+    }
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 4px 14px 24px #404;
+    }
+    .card img {
+        width: 100%;
+        height: 320px;
+        object-fit: cover;
+        display: block;
+        background-color: #223;
+    }
+    .card-text {
+        padding: 20px;
+    }
+    .card h3 {
+        margin: 0 0 10px;
+    }
+    .card p {
+        margin: 0 0 15px;
+        color: #aaa;
+    }
+    .card span {
+        color: rgb(141, 141, 215);
+    }
+
+    /* FOOTER */
+    footer {
+        padding: 20px;
+        text-align: center;
+        background-color: #112;
+        color: #888;
+    }
+</style>
+<body>
+    <nav>
+        <h2>🎬 Kinolar</h2>
+        <div>
+            <a href="/admin">Admin panel</a>
+            <a href="/">Chiqish</a>
+        </div>
+    </nav>
+
+    <main>
+        <h1>Bizning kinolar</h1>
+
+        <!-- Kinolar shu yerga chiqadi -->
+        <div class="cards"></div>
+    </main>
+
+    <footer>
+        CoddyCamp · ExpressJS
+    </footer>
+
+    <script>
+        // Serverdan kinolarni olamiz va kartochka qilib chiqaramiz
+        async function showMovies() {
+            const response = await fetch("/movies");
+            const movies = await response.json();
+
+            const cards = document.querySelector(".cards");
+            cards.innerHTML = "";
+
+            for (const movie of movies) {
+                cards.innerHTML += `
+                    <div class="card">
+                        <img src="${movie.image}" alt="${movie.title}">
+                        <div class="card-text">
+                            <h3>${movie.title}</h3>
+                            <p>${movie.subtitle}</p>
+                            <span>ID: ${movie.id}</span>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        showMovies();
+    </script>
+</body>
+</html>
