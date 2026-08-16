@@ -24,8 +24,8 @@ app.get("/about", (req,res)=>{
     })
 })
 
-app.get("/family", (req, res=>{
-    res.json(famliy)
-}))
+app.get("/family", (req, res)=>{
+    res.json(family)
+})
 
 export const handler = ServerlessHttp(app);
